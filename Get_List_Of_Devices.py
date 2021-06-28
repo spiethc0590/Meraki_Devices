@@ -10,7 +10,7 @@ url = "https://api.meraki.com/api/v1/"
 payload={}
 headers = {
   'Accept': '*/*',
-  'X-Cisco-Meraki-API-Key': 'd65a0f983403c6c57c480617abdee047ee1d8144',
+  'X-Cisco-Meraki-API-Key': '',
   'Content-Type': 'application/json'
 
 }

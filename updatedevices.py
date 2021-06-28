@@ -4,6 +4,8 @@ import requests
 import json
 import csv
 import subprocess
+import sys
+import time
 
 url = "https://api.meraki.com/api/v1/"
 
@@ -25,7 +27,7 @@ def get_orgs():
 		organizations.append((orgs[val]["name"]))
 	print(organizations)
 
-	orgname = input("Above is the organizations you have access to. Which do you want to add devices to?\n")
+	orgname = input("Above is the organizations you have access to. Which do you want to Update?\n")
 	Org_id = ""
 	if orgname in organizations:
 		for val in range(len(orgs)):
@@ -42,7 +44,7 @@ def get_network():
 		network_names.append((networks[val]["name"]))
 	print(network_names)
 
-	netname = input("Above is the networks you have access to. Which do you want to add devices to?\n")
+	netname = input("Above is the networks you have access to. Which do you update the devices on?\n")
 	net_id = ""
 	if netname in network_names:
 		for val in range(len(networks)):
@@ -64,8 +66,11 @@ def updatedevices():
       "notes": row[3],
       "lanIp": row[4]
       })
-      response = requests.request("PUT", url, headers=headers, data=payload)
-      print(response.text)
+			response = requests.request("PUT", url, headers=headers, data=payload)
+			response = response.json()
+			
+			print("Serial " + response['serial'] + " Updated  with  IP " + response['lanIp'] + " Note " + response['notes'] + " and Name " + response['name'] )
+			time.sleep(2)
 			if count > 500:
 				break
 			count += 1
@@ -74,7 +79,6 @@ def updatedevices():
 
 
 updatedevices()
-
 
 
 

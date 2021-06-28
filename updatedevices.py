@@ -64,6 +64,8 @@ def updatedevices():
       "notes": row[3],
       "lanIp": row[4]
       })
+      response = requests.request("PUT", url, headers=headers, data=payload)
+      print(response.text)
 			if count > 500:
 				break
 			count += 1
